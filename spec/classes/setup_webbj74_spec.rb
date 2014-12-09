@@ -4,6 +4,7 @@ require 'spec_helper'
 # or read http://rspec-puppet.com/tutorial/
 describe 'setup_webbj74' do
   it do
-    should contain_anchor('Hello_World')
+    should include_class('setup_webbj74')
+    should include_class('setup_webbj74::fonts')
   end
 end
