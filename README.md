@@ -4,15 +4,31 @@ This module sets a new machine up for me. Could be a helpful example to others.
 
 [![Build Status](https://travis-ci.org/webbj74/setup_webbj74.svg?branch=master)](https://travis-ci.org/webbj74/setup_webbj74)
 
-## Usage
+## General Usage
 
 ### Install all the things:
 ```puppet
 include setup_webbj74
 ```
-### Install a specifc font
+
+### Install apps I like
+```puppet
+include setup_webbj74::apps
+```
+
+### Install Fonts
+
+#### Install a specific font family
+```puppet
+include setup_webbj74::fonts::anonymous::all
+```
+
+#### Install a specific font
 ```puppet
 include setup_webbj74::fonts::anonymous::regular
+include setup_webbj74::fonts::anonymous::bold
+include setup_webbj74::fonts::anonymous::italic
+include setup_webbj74::fonts::anonymous::bold_italic
 ```
 
 ## Required Puppet Modules
