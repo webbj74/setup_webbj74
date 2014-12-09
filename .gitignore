@@ -4,5 +4,8 @@
 /spec/fixtures/.tmp
 /spec/fixtures/Puppetfile.lock
 /spec/fixtures/modules/boxen/
+/spec/fixtures/modules/git/
+/spec/fixtures/modules/inifile/
+/spec/fixtures/modules/homebrew/
 /spec/fixtures/modules/stdlib/
 /spec/fixtures/vendor
