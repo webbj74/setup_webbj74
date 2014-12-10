@@ -5,6 +5,9 @@ require 'spec_helper'
 describe 'setup_webbj74' do
   it do
     should include_class('setup_webbj74')
+    should include_class('setup_webbj74::apps')
     should include_class('setup_webbj74::fonts')
+    should include_class('setup_webbj74::gitconfig')
+    should include_class('setup_webbj74::osx')
   end
 end
