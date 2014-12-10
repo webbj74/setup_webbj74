@@ -1,5 +1,6 @@
-mod 'boxen', '3.6.1', :github_tarball => 'boxen/puppet-boxen'
+mod 'boxen', '3.7.0', :github_tarball => 'boxen/puppet-boxen'
 mod 'git', '2.7.0', :github_tarball => 'boxen/puppet-git'
-mod 'homebrew', '0.2.0', :github_tarball => 'boxen/puppet-homebrew'
-mod 'inifile',  '0.0.1', :github_tarball => 'boxen/puppet-inifile'
-mod 'stdlib', '4.1.0', :github_tarball => "puppetlabs/puppetlabs-stdlib"
+mod 'homebrew', '1.9.8', :github_tarball => 'boxen/puppet-homebrew'
+mod 'inifile',  '1.1.1', :github_tarball => 'puppetlabs/puppetlabs-inifile'
+mod 'module-data', '0.0.1',  :github_tarball => 'ripienaar/puppet-module-data'
+mod 'stdlib', '4.2.1', :github_tarball => "puppetlabs/puppetlabs-stdlib"

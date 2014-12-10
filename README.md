@@ -18,7 +18,13 @@ include setup_webbj74
 include setup_webbj74::apps
 ```
 
-### Install Fonts
+### Install brews I like
+
+```puppet
+include setup_webbj74::brews
+```
+
+### Install fonts
 
 #### Install a specific font family
 
