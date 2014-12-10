@@ -8,5 +8,6 @@
 /spec/fixtures/modules/inifile/
 /spec/fixtures/modules/homebrew/
 /spec/fixtures/modules/module-data/
+/spec/fixtures/modules/osx/
 /spec/fixtures/modules/stdlib/
 /spec/fixtures/vendor

@@ -3,4 +3,5 @@ mod 'git', '2.7.0', :github_tarball => 'boxen/puppet-git'
 mod 'homebrew', '1.9.8', :github_tarball => 'boxen/puppet-homebrew'
 mod 'inifile',  '1.1.1', :github_tarball => 'puppetlabs/puppetlabs-inifile'
 mod 'module-data', '0.0.1',  :github_tarball => 'ripienaar/puppet-module-data'
+mod 'osx', '2.8.0',  :github_tarball => 'boxen/puppet-osx'
 mod 'stdlib', '4.2.1', :github_tarball => "puppetlabs/puppetlabs-stdlib"
