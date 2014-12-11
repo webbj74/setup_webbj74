@@ -14,7 +14,7 @@ class setup_webbj74::gitconfig {
     'pager.show': value => 'log = diff-highlight | /usr/bin/less -+$LESS -FRX';
     'pager.diff': value => 'log = diff-highlight | /usr/bin/less -+$LESS -FRX';
 
-    'color.ui': value => 'true';
+    'color.ui': value => 'true'; # lint:ignore:quoted_booleans
 
     'pull.default': value => 'simple';
     'push.default': value => 'simple';
@@ -47,10 +47,12 @@ class setup_webbj74::gitconfig {
     'alias.contribs':        value => '"!f() { git log --oneline --no-merges --pretty=format:\"%an\" $(git ahtag)..master | sort -u |  awk \'{print}\' ORS=\'++ \' | sed -e \'s/^/Contributions by: /\'; }; f"';
     'alias.merges':          value => '"!f() { git log --oneline --merges --simplify-merges --pretty=format:\"%B\" $(git ahtag)..master | egrep -v \'(^Merge|^$)\' | sed -e \'s/^/  * /\'; }; f"';
     'alias.prnotes':         value => '"!f() { echo \'This release:\' ; (egrep -B100 -m1 \'^release\' CHANGELOG.md | sed -e \'1d;$d\') && git contribs ; }; f"';
+    # lint:ignore:single_quote_string_with_variables
     'alias.prod-release':    value => '"!f() { ACQUIA_REMOTE=$(git remote -v | grep -m 1 \"git@github.com:acquia/support-cli.git (push)\" | cut -f1) && RELEASE_TAG=$(date -u +release-%F-%H-%M) && git tag -a ${RELEASE_TAG} && git push ${ACQUIA_REMOTE} ${RELEASE_TAG} && git --no-pager log --pretty=format:\"%n%C(yellow)%h%Creset %s%Cblue [%an]%n       %Cred%d%Creset%n\" --decorate -1; }; f"';
     'alias.origin-release':  value => '"!f() { ACQUIA_REMOTE=$(git remote -v | grep -m 1 \"git@github.com:webbj74/support-cli.git (push)\" | cut -f1) && RELEASE_TAG=$(date -u +release-%F-%H-%M) && git tag -a ${RELEASE_TAG} && git push ${ACQUIA_REMOTE} ${RELEASE_TAG} && git --no-pager log --pretty=format:\"%n%C(yellow)%h%Creset %s%Cblue [%an]%n       %Cred%d%Creset%n\" --decorate -1; }; f"';
     'alias.prod-rollback':   value => '"!f() { ACQUIA_REMOTE=$(git remote -v | grep -m 1 \"git@github.com:acquia/support-cli.git (push)\" | cut -f1) && LATEST_TAG=$(git ls-remote --tags ${ACQUIA_REMOTE} release-* | cut -f2 | sort | tail -n1) && echo \"Rolling back ${LATEST_TAG}\" && git push ${ACQUIA_REMOTE} :${LATEST_TAG} && LATEST_TAG=$(git ls-remote --tags ${ACQUIA_REMOTE} release-* | cut -f2 | sort | tail -n1) && git --no-pager log --pretty=format:\"%nProd is now ${LATEST_TAG}%n%C(yellow)%h%Creset %s%Cblue [%an]%n       %Cred%d%Creset%n\" --decorate -1 ${LATEST_TAG}; }; f"';
     'alias.origin-rollback': value => '"!f() { ACQUIA_REMOTE=$(git remote -v | grep -m 1 \"git@github.com:webbj74/support-cli.git (push)\" | cut -f1) && LATEST_TAG=$(git ls-remote --tags ${ACQUIA_REMOTE} release-* | cut -f2 | sort | tail -n1) && echo \"Rolling back ${LATEST_TAG}\" && git push ${ACQUIA_REMOTE} :${LATEST_TAG} && LATEST_TAG=$(git ls-remote --tags ${ACQUIA_REMOTE} release-* | cut -f2 | sort | tail -n1) && git --no-pager log --pretty=format:\"%nProd is now ${LATEST_TAG}%n%C(yellow)%h%Creset %s%Cblue [%an]%n       %Cred%d%Creset%n\" --decorate -1 ${LATEST_TAG}; }; f"';
+    # lint:endignore
   }
 
   $gitignore = "# Globally ignored files
