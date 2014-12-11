@@ -9,5 +9,6 @@
 /spec/fixtures/modules/homebrew/
 /spec/fixtures/modules/module-data/
 /spec/fixtures/modules/osx/
+/spec/fixtures/modules/php/
 /spec/fixtures/modules/stdlib/
 /spec/fixtures/vendor
