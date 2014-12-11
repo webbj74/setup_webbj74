@@ -10,16 +10,14 @@ class setup_webbj74::gitconfig {
     'core.pager': value => '/usr/bin/less -+$LESS -FRX';
     'core.editor': value => 'vim';
 
-    'pager.log': value => 'log = diff-highlight | /usr/bin/less -+$LESS -FRX';
-    'pager.show': value => 'log = diff-highlight | /usr/bin/less -+$LESS -FRX';
-    'pager.diff': value => 'log = diff-highlight | /usr/bin/less -+$LESS -FRX';
+    'pager.log': value => '`brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | /usr/bin/less -+$LESS -FRX';
+    'pager.show': value => '`brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | /usr/bin/less -+$LESS -FRX';
+    'pager.diff': value => '`brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | /usr/bin/less -+$LESS -FRX';
 
     'color.ui': value => 'true'; # lint:ignore:quoted_booleans
 
     'pull.default': value => 'simple';
     'push.default': value => 'simple';
-
-    'hub.protocol': value => 'git';
   }
 
   # Common Aliases
@@ -86,5 +84,9 @@ ehthumbs.db
   Git::Config::Global <| title == 'core.excludesfile' |> {
     value   => "/Users/${::boxen_user}/.gitignore-global",
     require => File["/Users/${::boxen_user}/.gitignore-global"],
+  }
+
+  Git::Config::Global <| title == 'hub.protocol' |> {
+    value => 'git',
   }
 }
