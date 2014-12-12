@@ -87,6 +87,12 @@ ehthumbs.db
   }
 
   Git::Config::Global <| title == 'hub.protocol' |> {
-    value => 'git',
+    value => 'ssh',
+  }
+
+  # Command line includes
+  boxen::env_script { 'git_prompt':
+    source  => 'puppet:///modules/setup_webbj74/git_prompt.sh',
+    priority => 'low',
   }
 }
