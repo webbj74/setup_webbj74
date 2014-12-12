@@ -21,4 +21,9 @@ class setup_webbj74::php {
     php     => '5.5.13',
     version => '2.2.5',
   }
+
+  exec {'/opt/boxen/phpenv/bin/composer global require "phpmd/phpmd:@stable"':
+    creates => "/Users/${::boxen_user}/.composer/vendor/bin/phpmd",
+    require => Class["php::composer"],
+  }
 }
