@@ -4,6 +4,7 @@ class setup_webbj74::brews {
   include homebrew
 
   $webbj74_brews = [
+    'colordiff',
     'source-highlight',
     'the_silver_searcher',
     'terminal-notifier',
