@@ -35,6 +35,7 @@ class setup_webbj74::gitconfig {
     'alias.graph':    value => 'log --all --graph --decorate --oneline -n30';
     'alias.grep':     value => 'grep -EIi';
     'alias.sync':     value => '"!f() { git checkout master && git fetch --all && git rebase upstream/master && git push -f origin master; }; f"';
+    'alias.trim':     value => '"!f() { for GIT_TRIM_BRANCH in $(git branch --merged | egrep -v \"(\* | master$)\"); do git branch -d \"$GIT_TRIM_BRANCH\"; done; }; f"';
   }
 
   # Acquia-specifc helpers
