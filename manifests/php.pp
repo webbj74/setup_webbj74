@@ -8,6 +8,10 @@ class setup_webbj74::php {
     php     => '5.3.27',
   }
 
+  php::extension::memcache { 'memcache for 5.4.17':
+    php     => '5.4.17',
+  }
+
   php::extension::xdebug { 'xdebug for 5.4.17':
     php     => '5.4.17',
   }
