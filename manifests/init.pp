@@ -6,5 +6,6 @@ class setup_webbj74 {
   include setup_webbj74::gitconfig
   include setup_webbj74::osx
   include setup_webbj74::projects::error # troublemaker module sandbox
+  include setup_webbj74::vagrants
 }
 
