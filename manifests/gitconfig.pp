@@ -43,7 +43,7 @@ class setup_webbj74::gitconfig {
     'alias.ahremote':        value => '"!f() { git remote -v | grep -m 1 \"acquia/support-cli\" | cut -f1 ; }; f"';
     'alias.ahtag':           value => '"!f() { git ls-remote --tags $(git ahremote) release-* | cut -f2  | sort | tail -n1 ; }; f"';
     'alias.changes':         value => '"!f() { git log --oneline --no-merges $(git ahtag)..master | grep -v \'Update CHANGELOG.md\'; }; f"';
-    'alias.contribs':        value => '"!f() { git log --oneline --no-merges --pretty=format:\"%an\" $(git ahtag)..master | sort -u |  awk \'{print}\' ORS=\'++ \' | sed -e \'s/^/Contributions by: /\'; }; f"';
+    'alias.contribs':        value => '"!f() { git log --oneline --no-merges --pretty=format:\"%an\" $(git ahtag)..master | sort -u |  awk \'{print}\' ORS=\', \' | sed -e \'s/^/Contributions by: /\'; }; f"';
     'alias.merges':          value => '"!f() { git log --oneline --merges --simplify-merges --pretty=format:\"%B\" $(git ahtag)..master | egrep -v \'(^Merge|^$)\' | sed -e \'s/^/  * /\'; }; f"';
     'alias.prnotes':         value => '"!f() { echo \'This release:\' ; (egrep -B100 -m1 \'^release\' CHANGELOG.md | sed -e \'1d;$d\') && git contribs ; }; f"';
     # lint:ignore:single_quote_string_with_variables

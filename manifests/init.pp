@@ -9,6 +9,10 @@ class setup_webbj74 {
   include setup_webbj74::vagrants
   include setup_webbj74::projects::services7 # TAC-2906
 
+  boxen::env_script { 'phpstorm_xdebug':
+    source  => 'puppet:///modules/setup_webbj74/dotfiles/phpstorm-xdebug.sh',
+    priority => 'low',
+  }
   boxen::env_script { 'grep_options':
     source  => 'puppet:///modules/setup_webbj74/dotfiles/grep-options.sh',
     priority => 'low',
