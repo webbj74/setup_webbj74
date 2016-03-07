@@ -1,0 +1,105 @@
+# Example template for PHP-FPM based projects
+#
+# The template which nginx uses within a boxen::project can be overridden
+# to a specific template such as this one.
+#
+# The nginx-non-ac template assumes a repo has been created or downloaded from
+# a non-Acquia Cloud source where the code sits in the root of the repo.
+# If the code has been downloaded from or created from an Acquia Cloud repo,
+# it should use the nginx-ac template file.
+server {
+  access_log <%= scope.lookupvar "nginx::config::logdir" %>/<%= @name %>.access.log main;
+  listen 80;
+  root <%= @repo_dir %>;
+  server_name <%= @server_name %>;
+
+  client_max_body_size 50M;
+
+  error_page 500 502 503 504 /50x.html;
+
+  location / {
+    # Allow for both static and Drupal sitemap.
+    location = /sitemap.xml {
+      try_files $uri @drupal;
+    }
+    # Allow for both static and Drupal sitemap.
+    location = /robots.txt {
+      try_files $uri @drupal;
+    }
+    # Image derivative generation needs to go to Drupal
+    location ~* files/styles {
+      #access_log off;
+      #expires 30d;
+      try_files $uri @drupal;
+    }
+    ## All static files will be served directly.
+    location ~* ^.+\.(?:css|cur|js|jpe?g|gif|htc|ico|png|html|xml|otf|ttf|eot|woff|svg)$ {
+      access_log off;
+      expires 30d;
+      ## No need to bleed constant updates. Send the all shebang in one
+      ## fell swoop.
+      tcp_nodelay off;
+      ## Set the OS file cache.
+      open_file_cache max=3000 inactive=120s;
+      open_file_cache_valid 45s;
+      open_file_cache_min_uses 2;
+      open_file_cache_errors off;
+    }
+
+    try_files $uri @drupal;
+  }
+
+  location @drupal {
+    include <%= scope.lookupvar "nginx::config::configdir" %>/fastcgi_params;
+    keepalive_timeout 0;
+    fastcgi_pass unix:<%= scope.lookupvar "boxen::config::socketdir" %>/<%= @name %>;
+    fastcgi_param SCRIPT_FILENAME <%= @repo_dir %>/index.php;
+    fastcgi_param SCRIPT_NAME /index.php;
+    fastcgi_param PATH_INFO $fastcgi_script_name;
+    fastcgi_param QUERY_STRING q=$uri&$args;
+    fastcgi_read_timeout 14400;
+    fastcgi_index index.php;
+  }
+
+  ### Directives for installing drupal. This is for drupal 6 and 7.
+  location = /install.php {
+    include <%= scope.lookupvar "nginx::config::configdir" %>/fastcgi_params;
+    keepalive_timeout 0;
+    fastcgi_pass unix:<%= scope.lookupvar "boxen::config::socketdir" %>/<%= @name %>;
+    fastcgi_param SCRIPT_FILENAME <%= @repo_dir %>/install.php;
+    fastcgi_param PATH_INFO $fastcgi_script_name;
+  }
+
+  location = /update.php {
+    include <%= scope.lookupvar "nginx::config::configdir" %>/fastcgi_params;
+    keepalive_timeout 0;
+    fastcgi_pass unix:<%= scope.lookupvar "boxen::config::socketdir" %>/<%= @name %>;
+    fastcgi_param SCRIPT_FILENAME <%= @repo_dir %>/update.php;
+    fastcgi_param PATH_INFO $fastcgi_script_name;
+  }
+
+  ## This is for drupal 8. There's a new location for the install file.
+  location = /core/install.php {
+    include <%= scope.lookupvar "nginx::config::configdir" %>/fastcgi_params;
+    keepalive_timeout 0;
+    fastcgi_pass unix:<%= scope.lookupvar "boxen::config::socketdir" %>/<%= @name %>;
+    fastcgi_param SCRIPT_FILENAME <%= @repo_dir %>/core/install.php;
+    fastcgi_param PATH_INFO $fastcgi_script_name;
+  }
+
+  location = /core/update.php {
+    include <%= scope.lookupvar "nginx::config::configdir" %>/fastcgi_params;
+    keepalive_timeout 0;
+    fastcgi_pass unix:<%= scope.lookupvar "boxen::config::socketdir" %>/<%= @name %>;
+    fastcgi_param SCRIPT_FILENAME <%= @repo_dir %>/core/update.php;
+    fastcgi_param PATH_INFO $fastcgi_script_name;
+  }
+
+  # Direct requests towards the index.php page
+  location @index {
+    fastcgi_read_timeout 14400;
+    fastcgi_index index.php;
+    try_files $uri $uri/ /index.php?q=$uri&args;
+  }
+
+}

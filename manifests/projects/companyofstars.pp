@@ -1,13 +1,13 @@
 # D8 Learning Initiative
-class setup_webbj74::projects::d8li {
+class setup_webbj74::projects::companyofstars {
 
-  $site = 'd8li'
+  $site = 'companyofstars'
   php::project { $site:
     dir    => "${boxen::config::srcdir}/${site}",
-    source => 'git@github.com:drupal/drupal --branch=8.0.0-beta3',
+    source => 'git@github.com:webbj74/companyofstars.git',
     mysql  => true,
-    nginx  => 'setup_webbj74/nginx/nginx-non-ac.conf.erb',
-    php    => '5.4.17',
+    nginx  => 'setup_webbj74/nginx/nginx-ac.conf.erb',
+    php    => '5.5.25',
   }
 
   host {"${site}.dev":

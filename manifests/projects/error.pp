@@ -13,8 +13,8 @@ class setup_webbj74::projects::error {
     dir           => "${boxen::config::srcdir}/${site}",
     source        => 'error@svn-3985.devcloud.hosting.acquia.com:error.git',
     mysql         => true,
-    nginx         => 'projects/nginx/nginx-ac.conf.erb',
-    php           => '5.4.17',
+    nginx         => 'setup_webbj74/nginx/nginx-ac.conf.erb',
+    php           => '5.5.25',
   }
 
   host {"${site}.dev":
